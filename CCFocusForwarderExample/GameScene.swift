@@ -20,12 +20,22 @@ class GameScene: SKScene {
   
   var selectedCard: Card? {
     didSet {
+      var index: CGFloat = 0;
       for card: Card in self.cardDeck {
+        // TODO - This is hacky & comes with a performance impact, only apply actions to the cards that need to change!
+        var fadeAction: SKAction;
+        var scaleAction: SKAction;
         if card != self.selectedCard {
-          card.alpha = 0.2;
+          fadeAction = SKAction.fadeAlphaTo(0.2, duration: 0.2);
+          scaleAction = SKAction.scaleTo(1.0, duration: 0.2);
+          card.zPosition = index;
         } else {
-          card.alpha = 1.0;
+          fadeAction = SKAction.fadeAlphaTo(1.0, duration: 0.2);
+          scaleAction = SKAction.scaleTo(1.2, duration: 0.2);
+          card.zPosition = 999;
         }
+        card.runAction( SKAction.group([fadeAction, scaleAction]) );
+        index++;
       }
     }
   }
