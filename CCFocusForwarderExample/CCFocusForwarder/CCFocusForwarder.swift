@@ -20,7 +20,7 @@ switch between sounds (UIButton / UIVIew / ...).
 
 import UIKit
 
-protocol CCFocusForwarderDelegate: CCEventForwardingDelegate {
+protocol CCFocusForwarderDelegate {
   func focusForwarderDidMove(focusHeading: UIFocusHeading);
 }
 
@@ -31,7 +31,7 @@ enum FocusGuidePosition: Int {
   case Left;
 }
 
-class CCFocusForwarder: UIView, CCEventForwardingDelegate {
+class CCFocusForwarder: UIView {
   
   // When set to true, we see the elements on screen
   var debug: Bool = false {
@@ -145,7 +145,6 @@ class CCFocusForwarder: UIView, CCEventForwardingDelegate {
   func createButton(frame: CGRect, focusGuidePositions: [FocusGuidePosition]) -> (btn: CCEventForwardingButton, guides: [UIFocusGuide]) {
     let btn: CCEventForwardingButton = CCEventForwardingButton(frame: frame);
     btn.backgroundColor = UIColor.whiteColor();
-    btn.delegate = self;
     btn.frame = frame;
     self.addSubview(btn);
     
@@ -202,56 +201,6 @@ class CCFocusForwarder: UIView, CCEventForwardingDelegate {
     // Update the heading
     self.focusHeading = context.focusHeading;
     
-  }
-  
-  // Pass the events to the delegate (required when using UIButtons instead of UIViews)
-  
-  override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-    if let delegate = self.delegate {
-      delegate.touchesBegan(touches, withEvent: event);
-    }
-  }
-  
-  override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-    if let delegate = self.delegate {
-      delegate.touchesEnded(touches, withEvent: event);
-    }
-  }
-  
-  override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-    if let delegate = self.delegate {
-      delegate.touchesMoved(touches, withEvent: event);
-    }
-  }
-  
-  override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
-    if let delegate = self.delegate {
-      delegate.touchesCancelled(touches, withEvent: event);
-    }
-  }
-  
-  override func pressesBegan(presses: Set<UIPress>, withEvent event: UIPressesEvent?) {
-    if let delegate = self.delegate {
-      delegate.pressesBegan(presses, withEvent: event);
-    }
-  }
-  
-  override func pressesCancelled(presses: Set<UIPress>, withEvent event: UIPressesEvent?) {
-    if let delegate = self.delegate {
-      delegate.pressesCancelled(presses, withEvent: event);
-    }
-  }
-  
-  override func pressesChanged(presses: Set<UIPress>, withEvent event: UIPressesEvent?) {
-    if let delegate = self.delegate {
-      delegate.pressesChanged(presses, withEvent: event);
-    }
-  }
-  
-  override func pressesEnded(presses: Set<UIPress>, withEvent event: UIPressesEvent?) {
-    if let delegate = self.delegate {
-      delegate.pressesEnded(presses, withEvent: event);
-    }
   }
   
 }

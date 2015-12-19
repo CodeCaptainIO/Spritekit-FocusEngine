@@ -21,7 +21,7 @@ class GameScene: SKScene {
   var selectedCard: Card? {
     didSet {
       var index: CGFloat = 0;
-      var animationDuration: NSTimeInterval = 0.1;
+      let animationDuration: NSTimeInterval = 0.1;
       for card: Card in self.cardDeck {
         // TODO - This is hacky & comes with a performance impact, only apply actions to the cards that need to change!
         var fadeAction: SKAction;
