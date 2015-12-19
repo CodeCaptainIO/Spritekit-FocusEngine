@@ -118,6 +118,20 @@ class CCFocusForwarder: UIView, CCEventForwardingDelegate {
     self.bottomLeftFocusGuide = tuple.guides[0];
     self.leftBottomFocusGuide = tuple.guides[1];
     
+    // Set the preferredFocusedViews
+    
+    self.rightTopFocusGuide.preferredFocusedView = self.topLeftButton;
+    self.topRightFocusGuide.preferredFocusedView = self.bottomRightButton;
+    
+    self.leftTopFocusGuide.preferredFocusedView = self.topRightButton;
+    self.topLeftFocusGuide.preferredFocusedView = self.bottomLeftButton;
+    
+    self.leftBottomFocusGuide.preferredFocusedView = self.bottomRightButton;
+    self.bottomLeftFocusGuide.preferredFocusedView = self.topLeftButton;
+    
+    self.rightBottomFocusGuide.preferredFocusedView = self.bottomLeftButton;
+    self.bottomRightFocusGuide.preferredFocusedView = self.topRightButton;
+    
     self.setNeedsFocusUpdate();
     
   }
@@ -180,42 +194,13 @@ class CCFocusForwarder: UIView, CCEventForwardingDelegate {
   override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
     super.didUpdateFocusInContext(context, withAnimationCoordinator: coordinator)
     
-    guard let nextFocusedView = context.nextFocusedView else { return; }
+    // guard let nextFocusedView = context.nextFocusedView else { return; }
     
     context.nextFocusedView?.backgroundColor = UIColor.grayColor();
     context.previouslyFocusedView?.backgroundColor = UIColor.whiteColor();
     
     // Update the heading
     self.focusHeading = context.focusHeading;
-    
-    switch nextFocusedView {
-    case topRightButton:
-
-      self.rightTopFocusGuide.preferredFocusedView = self.topLeftButton;
-      self.topRightFocusGuide.preferredFocusedView = self.bottomRightButton;
-      break;
-      
-    case topLeftButton:
-
-      self.leftTopFocusGuide.preferredFocusedView = self.topRightButton;
-      self.topLeftFocusGuide.preferredFocusedView = self.bottomLeftButton;
-      break;
-      
-    case bottomLeftButton:
-      
-      self.leftBottomFocusGuide.preferredFocusedView = self.bottomRightButton;
-      self.bottomLeftFocusGuide.preferredFocusedView = self.topLeftButton;
-      break;
-      
-    case bottomRightButton:
-      
-      self.rightBottomFocusGuide.preferredFocusedView = self.bottomLeftButton;
-      self.bottomRightFocusGuide.preferredFocusedView = self.topRightButton;
-      break;
-      
-    default:
-      return;
-    }
     
   }
   
