@@ -8,24 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		04D509A31C25B19A00E44112 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D509A21C25B19A00E44112 /* AppDelegate.swift */; };
-		04D509A51C25B19A00E44112 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 04D509A41C25B19A00E44112 /* GameScene.sks */; };
 		04D509A71C25B19A00E44112 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D509A61C25B19A00E44112 /* GameScene.swift */; };
 		04D509A91C25B19A00E44112 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D509A81C25B19A00E44112 /* GameViewController.swift */; };
 		04D509AB1C25B19A00E44112 /* Game.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04D509AA1C25B19A00E44112 /* Game.xcassets */; };
 		04D509AE1C25B19A00E44112 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04D509AC1C25B19A00E44112 /* Main.storyboard */; };
 		04D509B01C25B19A00E44112 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04D509AF1C25B19A00E44112 /* Assets.xcassets */; };
+		04D509BA1C25B21F00E44112 /* CCEventForwardingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D509B81C25B21F00E44112 /* CCEventForwardingButton.swift */; };
+		04D509BB1C25B21F00E44112 /* CCFocusForwarder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D509B91C25B21F00E44112 /* CCFocusForwarder.swift */; };
+		04D509BD1C25B48900E44112 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D509BC1C25B48900E44112 /* Card.swift */; };
+		04D509BF1C25B88600E44112 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D509BE1C25B88600E44112 /* CardModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		04D5099F1C25B19A00E44112 /* CCFocusForwarderExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCFocusForwarderExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04D509A21C25B19A00E44112 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		04D509A41C25B19A00E44112 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		04D509A61C25B19A00E44112 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		04D509A81C25B19A00E44112 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		04D509AA1C25B19A00E44112 /* Game.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Game.xcassets; sourceTree = "<group>"; };
 		04D509AD1C25B19A00E44112 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		04D509AF1C25B19A00E44112 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04D509B11C25B19A00E44112 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04D509B81C25B21F00E44112 /* CCEventForwardingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCEventForwardingButton.swift; sourceTree = "<group>"; };
+		04D509B91C25B21F00E44112 /* CCFocusForwarder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCFocusForwarder.swift; sourceTree = "<group>"; };
+		04D509BC1C25B48900E44112 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		04D509BE1C25B88600E44112 /* CardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,16 +64,27 @@
 		04D509A11C25B19A00E44112 /* CCFocusForwarderExample */ = {
 			isa = PBXGroup;
 			children = (
+				04D509B71C25B21F00E44112 /* CCFocusForwarder */,
+				04D509BC1C25B48900E44112 /* Card.swift */,
+				04D509BE1C25B88600E44112 /* CardModel.swift */,
 				04D509A21C25B19A00E44112 /* AppDelegate.swift */,
-				04D509A41C25B19A00E44112 /* GameScene.sks */,
 				04D509A61C25B19A00E44112 /* GameScene.swift */,
 				04D509A81C25B19A00E44112 /* GameViewController.swift */,
-				04D509AA1C25B19A00E44112 /* Game.xcassets */,
 				04D509AC1C25B19A00E44112 /* Main.storyboard */,
+				04D509AA1C25B19A00E44112 /* Game.xcassets */,
 				04D509AF1C25B19A00E44112 /* Assets.xcassets */,
 				04D509B11C25B19A00E44112 /* Info.plist */,
 			);
 			path = CCFocusForwarderExample;
+			sourceTree = "<group>";
+		};
+		04D509B71C25B21F00E44112 /* CCFocusForwarder */ = {
+			isa = PBXGroup;
+			children = (
+				04D509B81C25B21F00E44112 /* CCEventForwardingButton.swift */,
+				04D509B91C25B21F00E44112 /* CCFocusForwarder.swift */,
+			);
+			path = CCFocusForwarder;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -129,7 +146,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				04D509AE1C25B19A00E44112 /* Main.storyboard in Resources */,
-				04D509A51C25B19A00E44112 /* GameScene.sks in Resources */,
 				04D509B01C25B19A00E44112 /* Assets.xcassets in Resources */,
 				04D509AB1C25B19A00E44112 /* Game.xcassets in Resources */,
 			);
@@ -143,8 +159,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				04D509A71C25B19A00E44112 /* GameScene.swift in Sources */,
+				04D509BD1C25B48900E44112 /* Card.swift in Sources */,
 				04D509A91C25B19A00E44112 /* GameViewController.swift in Sources */,
+				04D509BF1C25B88600E44112 /* CardModel.swift in Sources */,
 				04D509A31C25B19A00E44112 /* AppDelegate.swift in Sources */,
+				04D509BB1C25B21F00E44112 /* CCFocusForwarder.swift in Sources */,
+				04D509BA1C25B21F00E44112 /* CCEventForwardingButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,6 +272,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.codecaptain.CCFocusForwarderExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -264,6 +285,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.codecaptain.CCFocusForwarderExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Release;
 		};
@@ -286,6 +308,7 @@
 				04D509B61C25B19A00E44112 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

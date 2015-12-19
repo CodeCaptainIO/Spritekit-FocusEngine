@@ -9,37 +9,133 @@
 import SpriteKit
 
 class GameScene: SKScene {
-    override func didMoveToView(view: SKView) {
-        /* Setup your scene here */
-        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-        myLabel.text = "Hello, World!"
-        myLabel.fontSize = 65
-        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame))
-        
-        self.addChild(myLabel)
-    }
-    
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        /* Called when a touch begins */
-        
-        for touch in touches {
-            let location = touch.locationInNode(self)
-            
-            let sprite = SKSpriteNode(imageNamed:"Spaceship")
-            
-            sprite.xScale = 0.5
-            sprite.yScale = 0.5
-            sprite.position = location
-            
-            let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
-            
-            sprite.runAction(SKAction.repeatActionForever(action))
-            
-            self.addChild(sprite)
+  
+  var textLabel: SKLabelNode?;
+  
+  // 13 cards per row
+  let numberOfCardsPerRow: Int = 13;
+  
+  // Keep a reference to every card
+  var cardDeck: [Card]! = [];
+  
+  var selectedCard: Card? {
+    didSet {
+      for card: Card in self.cardDeck {
+        if card != self.selectedCard {
+          card.alpha = 0.2;
+        } else {
+          card.alpha = 1.0;
         }
+      }
     }
-   
-    override func update(currentTime: CFTimeInterval) {
-        /* Called before each frame is rendered */
+  }
+  
+  override func didMoveToView(view: SKView) {
+    self.backgroundColor = UIColor(red: 0.231, green: 0.49, blue: 0.725, alpha: 1.0);
+    
+    // Setup textlabel
+    self.textLabel = SKLabelNode(text: "Focus Forwarding Example for SpriteKit");
+    self.textLabel?.position = CGPointMake(self.size.width / 2, self.size.height - 100);
+    self.textLabel!.fontSize = 40;
+    self.textLabel!.fontName = "HelveticaNeue-Regular";
+    self.addChild(self.textLabel!);
+    
+    self.setupCards();
+  }
+  
+  func setupCards() {
+    let suits = [
+      Suit.Clubs,
+      Suit.Diamonds,
+      Suit.Hearts,
+      Suit.Spades
+    ];
+    let cards = [
+      Rank.Ace,
+      Rank.Two,
+      Rank.Three,
+      Rank.Four,
+      Rank.Five,
+      Rank.Six,
+      Rank.Seven,
+      Rank.Eight,
+      Rank.Nine,
+      Rank.Ten,
+      Rank.Jack,
+      Rank.Queen,
+      Rank.King
+    ];
+    
+    var yPos: CGFloat = self.size.height - 250;
+    
+    for suit: Suit in suits {
+      
+      var xPos: CGFloat = 77;
+      
+      for card: Rank in cards {
+        
+        let cardModel: CardModel = CardModel(suit: suit, card: card);
+        
+        let card: Card = Card(cardModel: cardModel);
+        self.cardDeck.append( card );
+        self.addChild( card );
+        card.position = CGPointMake(xPos, yPos);
+        
+        xPos += 147;
+        
+      }
+      yPos -= 200;
     }
+  }
+  
+  func openCurrentCard() {
+    if (!self.selectedCard!.open) {
+      self.selectedCard?.flip();
+    }
+  }
+  
+  func focusFirst() {
+    self.selectedCard = self.cardDeck[0];
+  }
+  
+  func focusNext() {
+    var index: Int = self.cardDeck.indexOf(self.selectedCard!)!;
+    let oldIndex = index;
+    index += 1;
+    // This check will keep the selected card on the same row & wrap around
+    if oldIndex % self.numberOfCardsPerRow > index % self.numberOfCardsPerRow {
+      index -= self.numberOfCardsPerRow;
+    }
+    self.selectedCard = self.cardDeck[index];
+  }
+  
+  func focusPrev() {
+    var index: Int = self.cardDeck.indexOf(self.selectedCard!)!;
+    let oldIndex = index;
+    index -= 1;
+    // This check will keep the selected card on the same row & wrap around
+    if oldIndex % self.numberOfCardsPerRow == 0 {
+      index += self.numberOfCardsPerRow;
+    }
+    self.selectedCard = self.cardDeck[index];
+  }
+  
+  func focusUp() {
+    var index: Int = self.cardDeck.indexOf(self.selectedCard!)!;
+    index -= self.numberOfCardsPerRow;
+    if index < 0 {
+      index = index + self.cardDeck.count;
+    }
+    self.selectedCard = self.cardDeck[index];
+  }
+  
+  func focusDown() {
+    var index: Int = self.cardDeck.indexOf(self.selectedCard!)!;
+    index += self.numberOfCardsPerRow;
+    if index > self.cardDeck.count - 1 {
+      index = index - self.cardDeck.count;
+    }
+    self.selectedCard = self.cardDeck[index];
+  }
+  
 }
