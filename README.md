@@ -25,11 +25,40 @@ Set the delegate of the forwarder.
 forwarder.delegate = self;
 ```
 
+Handle movement in `focusForwarderDidMove(focusHeading: UIFocusHeading)`
+
+```swift
+func focusForwarderDidMove(focusHeading: UIFocusHeading) {
+
+  if (focusHeading == UIFocusHeading.Right) {
+    print("Moving Right");
+  } else if (focusHeading == UIFocusHeading.Left) {
+    print("Moving Left");
+  } else if (focusHeading == UIFocusHeading.Up) {
+    print("Moving Up");
+  } else if (focusHeading == UIFocusHeading.Down) {
+    print("Moving Down");
+  }
+  
+}
+```
+
 # Example
 
 The example displays a deck of cards on screen through which you can scroll with the remote. Click to flip a card.
 This example could serve as a base for a 'memory' game.
 
+![Focus example](https://raw.githubusercontent.com/CodeCaptainIO/Spritekit-FocusEngine/931b7673ed8cb0dbeecc26f9abee94ca96fa2be6/screenshots/tv.png)
+
 Assets are are provided by [Kenney](https://twitter.com/KenneyWings).
 
-Enjoy!
+# Remarks
+
+Disabling the standard 'beep' sound is unfortunately not possible at this moment since Apple didn't expose that API.
+Take a look at private class _UIFocusEngine, which has a property _playsSoundOnFocusChange.
+https://github.com/neonichu/tvOS-headers/blob/b27d60eb4c2ab73c3473fcdc9219c6406ac1b885/UIKit/_UIFocusEngine.h
+
+# TODO
+
+- Possibility to change sounds (UIView has a different sound than UIButton)
+- Block scrolling in a certain direction
