@@ -34,4 +34,13 @@ This example could serve as a base for a 'memory' game.
 
 Assets are are provided by [Kenney](https://twitter.com/KenneyWings).
 
-Enjoy!
+# Remarks
+
+Disabling the standard 'beep' sound is unfortunately not possible at this moment since Apple didn't expose that API.
+Take a look at private class _UIFocusEngine, which has a property _playsSoundOnFocusChange.
+https://github.com/neonichu/tvOS-headers/blob/b27d60eb4c2ab73c3473fcdc9219c6406ac1b885/UIKit/_UIFocusEngine.h
+
+# TODO
+
+- Possibility to change sounds (UIView has a different sound than UIButton)
+- Block scrolling in a certain direction
