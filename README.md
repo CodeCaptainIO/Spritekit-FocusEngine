@@ -30,6 +30,8 @@ forwarder.delegate = self;
 The example displays a deck of cards on screen through which you can scroll with the remote. Click to flip a card.
 This example could serve as a base for a 'memory' game.
 
+![Focus example](https://raw.githubusercontent.com/CodeCaptainIO/Spritekit-FocusEngine/931b7673ed8cb0dbeecc26f9abee94ca96fa2be6/screenshots/tv.png)
+
 Assets are are provided by [Kenney](https://twitter.com/KenneyWings).
 
 Enjoy!
