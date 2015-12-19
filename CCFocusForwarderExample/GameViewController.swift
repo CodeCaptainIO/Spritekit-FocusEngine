@@ -36,7 +36,7 @@ class GameViewController: UIViewController, CCFocusForwarderDelegate {
       self.gameScene!.focusUp();
     } else if (focusHeading == UIFocusHeading.Down) {
       self.gameScene!.focusDown();
-    } else {
+    } else if (focusHeading.rawValue == 0) {
       self.gameScene!.focusFirst();
     }
   }
