@@ -25,6 +25,24 @@ Set the delegate of the forwarder.
 forwarder.delegate = self;
 ```
 
+Handle movement in `focusForwarderDidMove(focusHeading: UIFocusHeading)`
+
+```swift
+func focusForwarderDidMove(focusHeading: UIFocusHeading) {
+
+  if (focusHeading == UIFocusHeading.Right) {
+    print("Moving Right");
+  } else if (focusHeading == UIFocusHeading.Left) {
+    print("Moving Left");
+  } else if (focusHeading == UIFocusHeading.Up) {
+    print("Moving Up");
+  } else if (focusHeading == UIFocusHeading.Down) {
+    print("Moving Down");
+  }
+  
+}
+```
+
 # Example
 
 The example displays a deck of cards on screen through which you can scroll with the remote. Click to flip a card.
