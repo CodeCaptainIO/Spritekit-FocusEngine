@@ -59,22 +59,12 @@ class CCFocusForwarder: UIView {
   }
   
   var delegate: CCFocusForwarderDelegate?;
-  var topLeftButton: CCEventForwardingButton!;
-  var topRightButton: CCEventForwardingButton!;
-  var bottomLeftButton: CCEventForwardingButton!;
-  var bottomRightButton: CCEventForwardingButton!;
+  var button: CCFocusElement!;
   
-  var leftTopFocusGuide: UIFocusGuide!;
-  var leftBottomFocusGuide: UIFocusGuide!;
-  
-  var rightTopFocusGuide: UIFocusGuide!;
-  var rightBottomFocusGuide: UIFocusGuide!;
-  
-  var topLeftFocusGuide: UIFocusGuide!;
-  var topRightFocusGuide: UIFocusGuide!;
-  
-  var bottomLeftFocusGuide: UIFocusGuide!;
-  var bottomRightFocusGuide: UIFocusGuide!;
+  var topFocusGuide: UIFocusGuide!;
+  var rightFocusGuide: UIFocusGuide!;
+  var bottomFocusGuide: UIFocusGuide!;
+  var leftFocusGuide: UIFocusGuide!;
   
   required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)!;
@@ -94,43 +84,20 @@ class CCFocusForwarder: UIView {
     
     self.alpha = self.invisibleValue;
     
-    // TL
-    var tuple = self.createButton(CGRectMake(0, 0, 100, 100), focusGuidePositions: [.Top, .Left]);
-    self.topLeftButton = tuple.btn;
-    self.topLeftFocusGuide = tuple.guides[0];
-    self.leftTopFocusGuide = tuple.guides[1];
+    var tuple = self.createButton(CGRectMake(0, 0, 100, 100), focusGuidePositions: [.Top, .Right, .Bottom, .Left]);
+    self.button = tuple.btn;
     
-    // TR
-    tuple = self.createButton(CGRectMake(100, 0, 100, 100), focusGuidePositions: [.Top, .Right]);
-    self.topRightButton = tuple.btn;
-    self.topRightFocusGuide = tuple.guides[0];
-    self.rightTopFocusGuide = tuple.guides[1];
+    self.topFocusGuide = tuple.guides[0];
+    topFocusGuide.preferredFocusedView = self.button;
     
-    // BR
-    tuple = self.createButton(CGRectMake(100, 100, 100, 100), focusGuidePositions: [.Right, .Bottom]);
-    self.bottomRightButton = tuple.btn;
-    self.rightBottomFocusGuide = tuple.guides[0];
-    self.bottomRightFocusGuide = tuple.guides[1];
+    self.rightFocusGuide = tuple.guides[1];
+    self.rightFocusGuide.preferredFocusedView = self.button;
     
-    // BL
-    tuple = self.createButton(CGRectMake(0, 100, 100, 100), focusGuidePositions: [.Bottom, .Left]);
-    self.bottomLeftButton = tuple.btn;
-    self.bottomLeftFocusGuide = tuple.guides[0];
-    self.leftBottomFocusGuide = tuple.guides[1];
+    self.bottomFocusGuide = tuple.guides[2];
+    self.bottomFocusGuide.preferredFocusedView = self.button;
     
-    // Set the preferredFocusedViews
-    
-    self.rightTopFocusGuide.preferredFocusedView = self.topLeftButton;
-    self.topRightFocusGuide.preferredFocusedView = self.bottomRightButton;
-    
-    self.leftTopFocusGuide.preferredFocusedView = self.topRightButton;
-    self.topLeftFocusGuide.preferredFocusedView = self.bottomLeftButton;
-    
-    self.leftBottomFocusGuide.preferredFocusedView = self.bottomRightButton;
-    self.bottomLeftFocusGuide.preferredFocusedView = self.topLeftButton;
-    
-    self.rightBottomFocusGuide.preferredFocusedView = self.bottomLeftButton;
-    self.bottomRightFocusGuide.preferredFocusedView = self.topRightButton;
+    self.leftFocusGuide = tuple.guides[3];
+    self.leftFocusGuide.preferredFocusedView = self.button;
     
     self.setNeedsFocusUpdate();
     
@@ -142,9 +109,10 @@ class CCFocusForwarder: UIView {
    @param frame: Frame of the button
    @param focusGuidePositions: Array of focus guide positions
    */
-  func createButton(frame: CGRect, focusGuidePositions: [FocusGuidePosition]) -> (btn: CCEventForwardingButton, guides: [UIFocusGuide]) {
-    let btn: CCEventForwardingButton = CCEventForwardingButton(frame: frame);
+  func createButton(frame: CGRect, focusGuidePositions: [FocusGuidePosition]) -> (btn: CCFocusElement, guides: [UIFocusGuide]) {
+    let btn: CCFocusElement = CCFocusElement(frame: frame);
     btn.backgroundColor = UIColor.whiteColor();
+    btn.userInteractionEnabled = true;
     btn.frame = frame;
     self.addSubview(btn);
     
@@ -159,7 +127,7 @@ class CCFocusForwarder: UIView {
       guide.widthAnchor.constraintEqualToAnchor(btn.widthAnchor).active = true;
       guide.heightAnchor.constraintEqualToAnchor(btn.heightAnchor).active = true;
       
-      // Create layout guides at the given position
+      // Create focus guides at the given position
       
       if (focusGuidePosition == .Left) {
         
@@ -192,8 +160,6 @@ class CCFocusForwarder: UIView {
   
   override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
     super.didUpdateFocusInContext(context, withAnimationCoordinator: coordinator)
-    
-    // guard let nextFocusedView = context.nextFocusedView else { return; }
     
     context.nextFocusedView?.backgroundColor = UIColor.grayColor();
     context.previouslyFocusedView?.backgroundColor = UIColor.whiteColor();

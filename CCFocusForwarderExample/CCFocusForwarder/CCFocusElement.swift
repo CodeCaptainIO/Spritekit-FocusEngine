@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CCEventForwardingButton: UIButton {
+class CCFocusElement: UIView {
   
   override init(frame: CGRect) {
     super.init(frame: frame);
@@ -19,7 +19,7 @@ class CCEventForwardingButton: UIButton {
   }
   
   override func canBecomeFocused() -> Bool {
-    return true
+    return true;
   }
     
 }

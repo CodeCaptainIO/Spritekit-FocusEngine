@@ -15,9 +15,11 @@ class GameViewController: UIViewController, CCFocusForwarderDelegate {
   
   override func pressesBegan(presses: Set<UIPress>, withEvent event: UIPressesEvent?) {
     let press: UIPress = presses.first!;
+    
     if (press.type == .Select) {
       self.gameScene?.openCurrentCard();
     }
+    
   }
   
   override func viewDidLoad() {
@@ -28,6 +30,7 @@ class GameViewController: UIViewController, CCFocusForwarderDelegate {
   }
   
   func focusForwarderDidMove(focusHeading: UIFocusHeading) {
+    
     if (focusHeading == UIFocusHeading.Right) {
       self.gameScene!.focusNext();
     } else if (focusHeading == UIFocusHeading.Left) {
@@ -39,12 +42,14 @@ class GameViewController: UIViewController, CCFocusForwarderDelegate {
     } else if (focusHeading.rawValue == 0) {
       self.gameScene!.focusFirst();
     }
+    
   }
   
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews();
     
     let skView: SKView = self.view as! SKView;
+    
     if skView.scene == nil {
 
       self.gameScene = GameScene();
@@ -59,6 +64,6 @@ class GameViewController: UIViewController, CCFocusForwarderDelegate {
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
-    // Release any cached data, images, etc that aren't in use.
+
   }
 }

@@ -8,35 +8,6 @@
 
 import SpriteKit
 
-enum Suit: String {
-  case Clubs = "Clubs";
-  case Diamonds = "Diamonds";
-  case Hearts = "Hearts";
-  case Spades = "Spades";
-}
-
-enum Rank: Int {
-  case Ace = 1; // we do this so we don't start at 0
-  case Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten;
-  case Jack, Queen, King;
-  func stringValue() -> String {
-    switch self {
-    case .Ace:
-      return "A";
-    case .Jack:
-      return "J";
-    case .Queen:
-      return "Q";
-    case .King:
-      return "K";
-    default:
-      return String(self.rawValue);
-    }
-  }
-}
-
-import SpriteKit
-
 class Card: SKNode {
   
   override var description: String {
