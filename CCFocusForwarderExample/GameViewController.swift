@@ -29,6 +29,23 @@ class GameViewController: UIViewController, CCFocusForwarderDelegate {
     // forwarder.debug = true    
   }
   
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    
+    let skView: SKView = self.view as! SKView
+    
+    if skView.scene == nil {
+      
+      self.gameScene = GameScene()
+      self.gameScene?.size = self.view.frame.size
+      self.gameScene!.scaleMode = SKSceneScaleMode.AspectFill
+      
+      skView.presentScene(self.gameScene!)
+      
+    }
+    
+  }
+  
   // CCFocusForwarderDelegate
   
   func focusForwarderDidMove(focusHeading: UIFocusHeading) {
@@ -50,35 +67,17 @@ class GameViewController: UIViewController, CCFocusForwarderDelegate {
   func focusForwarderCanMoveRight() -> Bool {
     return self.gameScene!.canMoveRight()
   }
+  
   func focusForwarderCanMoveLeft() -> Bool {
     return self.gameScene!.canMoveLeft()
   }
+  
   func focusForwarderCanMoveUp() -> Bool {
     return self.gameScene!.canMoveUp()
   }
+  
   func focusForwarderCanMoveDown() -> Bool {
     return self.gameScene!.canMoveDown()
   }
   
-  override func viewWillLayoutSubviews() {
-    super.viewWillLayoutSubviews()
-    
-    let skView: SKView = self.view as! SKView
-    
-    if skView.scene == nil {
-
-      self.gameScene = GameScene()
-      self.gameScene?.size = self.view.frame.size
-      self.gameScene!.scaleMode = SKSceneScaleMode.AspectFill
-      
-      skView.presentScene(self.gameScene!)
-      
-    }
-    
-  }
-  
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-
-  }
 }

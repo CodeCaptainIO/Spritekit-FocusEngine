@@ -20,12 +20,12 @@ switch between sounds (UIButton / UIVIew / ...).
 
 import UIKit
 
-protocol CCFocusForwarderDelegate {
+@objc protocol CCFocusForwarderDelegate {
   func focusForwarderDidMove(focusHeading: UIFocusHeading)
-  func focusForwarderCanMoveRight() -> Bool
-  func focusForwarderCanMoveLeft() -> Bool
-  func focusForwarderCanMoveUp() -> Bool
-  func focusForwarderCanMoveDown() -> Bool
+  optional func focusForwarderCanMoveRight() -> Bool
+  optional func focusForwarderCanMoveLeft() -> Bool
+  optional func focusForwarderCanMoveUp() -> Bool
+  optional func focusForwarderCanMoveDown() -> Bool
 }
 
 enum FocusGuidePosition: Int {
@@ -170,13 +170,21 @@ class CCFocusForwarder: UIView {
     
     if let delegate = self.delegate {
       if heading == .Right {
-        return delegate.focusForwarderCanMoveRight()
+        if let method = delegate.focusForwarderCanMoveRight {
+          return method()
+        }
       } else if heading == .Left {
-        return delegate.focusForwarderCanMoveLeft()
+        if let method = delegate.focusForwarderCanMoveLeft {
+          return method()
+        }
       } else if heading == .Up {
-        return delegate.focusForwarderCanMoveUp()
+        if let method = delegate.focusForwarderCanMoveUp {
+          return method()
+        }
       } else if heading == .Down {
-        return delegate.focusForwarderCanMoveDown()
+        if let method = delegate.focusForwarderCanMoveDown {
+          return method()
+        }
       }
     }
     
