@@ -22,6 +22,10 @@ import UIKit
 
 protocol CCFocusForwarderDelegate {
   func focusForwarderDidMove(focusHeading: UIFocusHeading)
+  func focusForwarderCanMoveRight() -> Bool
+  func focusForwarderCanMoveLeft() -> Bool
+  func focusForwarderCanMoveUp() -> Bool
+  func focusForwarderCanMoveDown() -> Bool
 }
 
 enum FocusGuidePosition: Int {
@@ -159,6 +163,24 @@ class CCFocusForwarder: UIView {
     // Return tuple with button & guides
     return (btn, guides)
     
+  }
+  
+  override func shouldUpdateFocusInContext(context: UIFocusUpdateContext) -> Bool {
+    let heading = context.focusHeading
+    
+    if let delegate = self.delegate {
+      if heading == .Right {
+        return delegate.focusForwarderCanMoveRight()
+      } else if heading == .Left {
+        return delegate.focusForwarderCanMoveLeft()
+      } else if heading == .Up {
+        return delegate.focusForwarderCanMoveUp()
+      } else if heading == .Down {
+        return delegate.focusForwarderCanMoveDown()
+      }
+    }
+    
+    return true
   }
   
   override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {

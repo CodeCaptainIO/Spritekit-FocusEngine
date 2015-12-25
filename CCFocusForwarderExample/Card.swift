@@ -24,6 +24,16 @@ class Card: SKNode {
     }
   }
   
+  var enabled: Bool = true {
+    didSet {
+      if self.enabled {
+        self.hidden = false
+      } else {
+        self.hidden = true
+      }
+    }
+  }
+  
   private var back: SKSpriteNode?
   private var front: SKSpriteNode?
   var size: CGSize {

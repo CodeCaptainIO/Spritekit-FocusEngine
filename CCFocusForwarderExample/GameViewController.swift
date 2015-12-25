@@ -26,27 +26,38 @@ class GameViewController: UIViewController, CCFocusForwarderDelegate {
     let forwarder: CCFocusForwarder = CCFocusForwarder()
     forwarder.delegate = self
     self.view.addSubview(forwarder)
-    // forwarder.debug = true
-    
-    let recognizer: UIPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: Selector("pan:"))
-    self.view.addGestureRecognizer(recognizer)
-    
+    // forwarder.debug = true    
   }
+  
+  // CCFocusForwarderDelegate
   
   func focusForwarderDidMove(focusHeading: UIFocusHeading) {
     
-    if focusHeading == UIFocusHeading.Right {
+    if focusHeading == .Right {
       self.gameScene!.focusNext()
-    } else if focusHeading == UIFocusHeading.Left {
+    } else if focusHeading == .Left {
       self.gameScene!.focusPrev()
-    } else if focusHeading == UIFocusHeading.Up {
+    } else if focusHeading == .Up {
       self.gameScene!.focusUp()
-    } else if focusHeading == UIFocusHeading.Down {
+    } else if focusHeading == .Down {
       self.gameScene!.focusDown()
     } else if focusHeading.rawValue == 0 {
       self.gameScene!.focusFirst()
     }
     
+  }
+  
+  func focusForwarderCanMoveRight() -> Bool {
+    return self.gameScene!.canMoveRight()
+  }
+  func focusForwarderCanMoveLeft() -> Bool {
+    return self.gameScene!.canMoveLeft()
+  }
+  func focusForwarderCanMoveUp() -> Bool {
+    return self.gameScene!.canMoveUp()
+  }
+  func focusForwarderCanMoveDown() -> Bool {
+    return self.gameScene!.canMoveDown()
   }
   
   override func viewWillLayoutSubviews() {

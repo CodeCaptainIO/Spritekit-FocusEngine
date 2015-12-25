@@ -18,6 +18,62 @@ class GameScene: SKScene {
   // Keep a reference to every card
   var cardDeck: [Card]! = []
   
+  var indexDown: Int {
+    get {
+      var index: Int = self.cardDeck.indexOf(self.selectedCard!)!
+      index += self.numberOfCardsPerRow
+      
+      if index > self.cardDeck.count - 1 {
+        index = index - self.cardDeck.count
+      }
+      
+      return index
+    }
+  }
+  
+  var indexNext: Int {
+    get {
+      var index: Int = self.cardDeck.indexOf(self.selectedCard!)!
+      let oldIndex = index
+      index += 1
+      
+      // This check will keep the selected card on the same row & wrap around
+      if oldIndex % self.numberOfCardsPerRow > index % self.numberOfCardsPerRow {
+        index -= self.numberOfCardsPerRow
+      }
+      
+      return index
+    }
+  }
+  
+  var indexPrev: Int {
+    get {
+      var index: Int = self.cardDeck.indexOf(self.selectedCard!)!
+      let oldIndex = index
+      index -= 1
+      
+      // This check will keep the selected card on the same row & wrap around
+      if oldIndex % self.numberOfCardsPerRow == 0 {
+        index += self.numberOfCardsPerRow
+      }
+      
+      return index
+    }
+  }
+  
+  var indexUp: Int {
+    get {
+      var index: Int = self.cardDeck.indexOf(self.selectedCard!)!
+      index -= self.numberOfCardsPerRow
+      
+      if index < 0 {
+        index = index + self.cardDeck.count
+      }
+      
+      return index
+    }
+  }
+  
   var selectedCard: Card? {
     didSet {
       var index: CGFloat = 0
@@ -93,6 +149,8 @@ class GameScene: SKScene {
         let cardModel: CardModel = CardModel(suit: suit, card: card)
         
         let card: Card = Card(cardModel: cardModel)
+        let randomNumber = arc4random_uniform(10)
+        card.enabled = randomNumber != 1 // in 10 should be disabled
         self.cardDeck.append( card )
         self.addChild( card )
         card.position = CGPoint(x: xPos, y: yPos)
@@ -120,54 +178,60 @@ class GameScene: SKScene {
   }
   
   func focusNext() {
-    var index: Int = self.cardDeck.indexOf(self.selectedCard!)!
-    let oldIndex = index
-    index += 1
-  
-    // This check will keep the selected card on the same row & wrap around
-    if oldIndex % self.numberOfCardsPerRow > index % self.numberOfCardsPerRow {
-      index -= self.numberOfCardsPerRow
-    }
     
-    self.selectedCard = self.cardDeck[index]
+    self.selectedCard = self.cardDeck[self.indexNext]
     
   }
   
   func focusPrev() {
-    var index: Int = self.cardDeck.indexOf(self.selectedCard!)!
-    let oldIndex = index
-    index -= 1
-   
-    // This check will keep the selected card on the same row & wrap around
-    if oldIndex % self.numberOfCardsPerRow == 0 {
-      index += self.numberOfCardsPerRow
-    }
     
-    self.selectedCard = self.cardDeck[index]
+    self.selectedCard = self.cardDeck[self.indexPrev]
     
   }
   
   func focusUp() {
-    var index: Int = self.cardDeck.indexOf(self.selectedCard!)!
-    index -= self.numberOfCardsPerRow
-
-    if index < 0 {
-      index = index + self.cardDeck.count
-    }
     
-    self.selectedCard = self.cardDeck[index]
+    self.selectedCard = self.cardDeck[self.indexUp]
     
   }
   
   func focusDown() {
-    var index: Int = self.cardDeck.indexOf(self.selectedCard!)!
-    index += self.numberOfCardsPerRow
-   
-    if index > self.cardDeck.count - 1 {
-      index = index - self.cardDeck.count
-    }
-    self.selectedCard = self.cardDeck[index]
+    
+    self.selectedCard = self.cardDeck[self.indexDown]
     
   }
+  
+  func canMoveRight() -> Bool {
+    
+    let card = self.cardDeck[self.indexNext]
+    
+    return card.enabled
+    
+  }
+  
+  func canMoveLeft() -> Bool {
+    
+    let card = self.cardDeck[self.indexPrev]
+    
+    return card.enabled
+    
+  }
+  
+  func canMoveUp() -> Bool {
+
+    let card = self.cardDeck[self.indexUp]
+    
+    return card.enabled
+    
+  }
+  
+  func canMoveDown() -> Bool {
+
+    let card = self.cardDeck[self.indexDown]
+    
+    return card.enabled
+    
+  }
+
   
 }
