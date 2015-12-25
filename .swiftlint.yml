@@ -1,0 +1,29 @@
+disabled_rules: # rule identifiers to exclude from running
+  # - closing_brace
+  # - comma
+  # - control_statement
+  - force_cast
+  # - force_try
+  # - leading_whitespace
+  # - legacy_constructor
+  # - nesting
+  # - opening_brace
+  # - operator_whitespace
+  # - return_arrow_whitespace
+  # - statement_position
+  # - todo
+  # - trailing_newline
+  # - trailing_semicolon
+  - trailing_whitespace
+  # - type_name
+  # - valid_docs
+  # - variable_name
+  - file_length
+  - function_body_length
+  - line_length
+  - type_body_length
+  # - variable_name_max_length
+  # - variable_name_min_length
+excluded: # paths to ignore during linting.
+  - Carthage
+  - Pods

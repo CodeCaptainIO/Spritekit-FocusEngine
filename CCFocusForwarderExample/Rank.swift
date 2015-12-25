@@ -9,21 +9,21 @@
 import Foundation
 
 enum Rank: Int {
-  case Ace = 1; // we do this so we don't start at 0
-  case Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten;
-  case Jack, Queen, King;
+  case Ace = 1 // we do this so we don't start at 0
+  case Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten
+  case Jack, Queen, King
   func stringValue() -> String {
     switch self {
     case .Ace:
-      return "A";
+      return "A"
     case .Jack:
-      return "J";
+      return "J"
     case .Queen:
-      return "Q";
+      return "Q"
     case .King:
-      return "K";
+      return "K"
     default:
-      return String(self.rawValue);
+      return String(self.rawValue)
     }
   }
 }

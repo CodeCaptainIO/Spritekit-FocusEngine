@@ -11,52 +11,56 @@ import SpriteKit
 
 class GameViewController: UIViewController, CCFocusForwarderDelegate {
   
-  var gameScene: GameScene?;
+  var gameScene: GameScene?
   
   override func pressesBegan(presses: Set<UIPress>, withEvent event: UIPressesEvent?) {
-    let press: UIPress = presses.first!;
+    let press: UIPress = presses.first!
     
-    if (press.type == .Select) {
-      self.gameScene?.openCurrentCard();
+    if press.type == .Select {
+      self.gameScene?.openCurrentCard()
     }
     
   }
   
   override func viewDidLoad() {
-    let forwarder: CCFocusForwarder = CCFocusForwarder();
-    forwarder.delegate = self;
-    self.view.addSubview(forwarder);
-    // forwarder.debug = true;
+    let forwarder: CCFocusForwarder = CCFocusForwarder()
+    forwarder.delegate = self
+    self.view.addSubview(forwarder)
+    // forwarder.debug = true
+    
+    let recognizer: UIPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: Selector("pan:"))
+    self.view.addGestureRecognizer(recognizer)
+    
   }
   
   func focusForwarderDidMove(focusHeading: UIFocusHeading) {
     
-    if (focusHeading == UIFocusHeading.Right) {
-      self.gameScene!.focusNext();
-    } else if (focusHeading == UIFocusHeading.Left) {
-      self.gameScene!.focusPrev();
-    } else if (focusHeading == UIFocusHeading.Up) {
-      self.gameScene!.focusUp();
-    } else if (focusHeading == UIFocusHeading.Down) {
-      self.gameScene!.focusDown();
-    } else if (focusHeading.rawValue == 0) {
-      self.gameScene!.focusFirst();
+    if focusHeading == UIFocusHeading.Right {
+      self.gameScene!.focusNext()
+    } else if focusHeading == UIFocusHeading.Left {
+      self.gameScene!.focusPrev()
+    } else if focusHeading == UIFocusHeading.Up {
+      self.gameScene!.focusUp()
+    } else if focusHeading == UIFocusHeading.Down {
+      self.gameScene!.focusDown()
+    } else if focusHeading.rawValue == 0 {
+      self.gameScene!.focusFirst()
     }
     
   }
   
   override func viewWillLayoutSubviews() {
-    super.viewWillLayoutSubviews();
+    super.viewWillLayoutSubviews()
     
-    let skView: SKView = self.view as! SKView;
+    let skView: SKView = self.view as! SKView
     
     if skView.scene == nil {
 
-      self.gameScene = GameScene();
-      self.gameScene?.size = self.view.frame.size;
-      self.gameScene!.scaleMode = SKSceneScaleMode.AspectFill;
+      self.gameScene = GameScene()
+      self.gameScene?.size = self.view.frame.size
+      self.gameScene!.scaleMode = SKSceneScaleMode.AspectFill
       
-      skView.presentScene(self.gameScene!);
+      skView.presentScene(self.gameScene!)
       
     }
     

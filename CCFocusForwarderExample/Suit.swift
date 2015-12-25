@@ -9,8 +9,8 @@
 import Foundation
 
 enum Suit: String {
-  case Clubs = "Clubs";
-  case Diamonds = "Diamonds";
-  case Hearts = "Hearts";
-  case Spades = "Spades";
+  case Clubs = "Clubs"
+  case Diamonds = "Diamonds"
+  case Hearts = "Hearts"
+  case Spades = "Spades"
 }

@@ -19,6 +19,7 @@
 		04D509BB1C25B21F00E44112 /* CCFocusForwarder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D509B91C25B21F00E44112 /* CCFocusForwarder.swift */; };
 		04D509BD1C25B48900E44112 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D509BC1C25B48900E44112 /* Card.swift */; };
 		04D509BF1C25B88600E44112 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D509BE1C25B88600E44112 /* CardModel.swift */; };
+		04DB563C1C277E4E0016BD8B /* NSObject+CCFocusEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DB563B1C277E4E0016BD8B /* NSObject+CCFocusEngine.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,9 @@
 		04D509B91C25B21F00E44112 /* CCFocusForwarder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCFocusForwarder.swift; sourceTree = "<group>"; };
 		04D509BC1C25B48900E44112 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		04D509BE1C25B88600E44112 /* CardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
+		04DB56361C277E320016BD8B /* CCFocusForwarderExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CCFocusForwarderExample-Bridging-Header.h"; sourceTree = "<group>"; };
+		04DB563A1C277E4E0016BD8B /* NSObject+CCFocusEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CCFocusEngine.h"; sourceTree = "<group>"; };
+		04DB563B1C277E4E0016BD8B /* NSObject+CCFocusEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+CCFocusEngine.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,10 +115,21 @@
 		04D509B71C25B21F00E44112 /* CCFocusForwarder */ = {
 			isa = PBXGroup;
 			children = (
+				04DB563D1C277E920016BD8B /* Categories */,
 				04D509B81C25B21F00E44112 /* CCFocusElement.swift */,
 				04D509B91C25B21F00E44112 /* CCFocusForwarder.swift */,
+				04DB56361C277E320016BD8B /* CCFocusForwarderExample-Bridging-Header.h */,
 			);
 			path = CCFocusForwarder;
+			sourceTree = "<group>";
+		};
+		04DB563D1C277E920016BD8B /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				04DB563A1C277E4E0016BD8B /* NSObject+CCFocusEngine.h */,
+				04DB563B1C277E4E0016BD8B /* NSObject+CCFocusEngine.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,6 +142,7 @@
 				04D5099B1C25B19A00E44112 /* Sources */,
 				04D5099C1C25B19A00E44112 /* Frameworks */,
 				04D5099D1C25B19A00E44112 /* Resources */,
+				04FA51FD1C2DAB7900F2BC74 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -183,6 +199,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		04FA51FD1C2DAB7900F2BC74 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi\nexit 0";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		04D5099B1C25B19A00E44112 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -192,6 +224,7 @@
 				04D509BD1C25B48900E44112 /* Card.swift in Sources */,
 				04C81A7B1C26CC3A0087EF4D /* Suit.swift in Sources */,
 				04D509A91C25B19A00E44112 /* GameViewController.swift in Sources */,
+				04DB563C1C277E4E0016BD8B /* NSObject+CCFocusEngine.m in Sources */,
 				04D509BF1C25B88600E44112 /* CardModel.swift in Sources */,
 				04D509A31C25B19A00E44112 /* AppDelegate.swift in Sources */,
 				04C81A7D1C26CC5D0087EF4D /* Rank.swift in Sources */,
@@ -300,10 +333,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"ENABLE_FOCUS_ENGINE_MUTING=1",
+				);
 				INFOPLIST_FILE = CCFocusForwarderExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.codecaptain.CCFocusForwarderExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "CCFocusForwarderExample/CCFocusForwarder/CCFocusForwarderExample-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -313,10 +354,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = CCFocusForwarderExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.codecaptain.CCFocusForwarderExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "CCFocusForwarderExample/CCFocusForwarder/CCFocusForwarderExample-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Release;
