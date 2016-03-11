@@ -1,6 +1,6 @@
 # Spritekit-FocusEngine for tvOS
 
-Blogpost: http://www.codecaptain.io/webdevelopment/focus-engine-for-spritekit-tvos/245
+Blogpost: https://www.codecaptain.io/blog/ios-development/focus-engine-for-spritekit-tvos/245
 
 Since SpriteKit didn't come with a focus engine, this example shows you how to 'forward' focus to a Spritekit scene.
 
